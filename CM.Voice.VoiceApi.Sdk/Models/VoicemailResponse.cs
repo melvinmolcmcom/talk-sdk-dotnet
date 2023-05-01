@@ -1,23 +1,22 @@
-﻿namespace CM.Voice.VoiceApi.Sdk.Models
+﻿namespace CM.Voice.VoiceApi.Sdk.Models;
+
+/// <summary>
+/// Determines the response when a voicemail beep is detected.
+/// </summary>
+public enum VoicemailResponse
 {
     /// <summary>
-    /// Determines the response when a voicemail beep is detected.
+    /// Ignores Voicemail detection.
     /// </summary>
-    public enum VoicemailResponse
-    {
-        /// <summary>
-        /// Ignores Voicemail detection.
-        /// </summary>
-        Ignore,
+    Ignore,
 
-        /// <summary>
-        /// Restarts when Voicemail has been detected.
-        /// </summary>
-        Restart,
+    /// <summary>
+    /// Restarts when Voicemail has been detected.
+    /// </summary>
+    Restart,
 
-        /// <summary>
-        /// Stops the call when Voicemail has been detected.
-        /// </summary>
-        Stop
-    }
+    /// <summary>
+    /// Stops the call when Voicemail has been detected.
+    /// </summary>
+    Stop
 }

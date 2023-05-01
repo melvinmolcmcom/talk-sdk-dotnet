@@ -1,17 +1,16 @@
-﻿namespace CM.Voice.VoiceApi.Sdk.Models
+﻿namespace CM.Voice.VoiceApi.Sdk.Models;
+
+/// <summary>
+/// Gender, so either male or female.
+/// </summary>
+public enum Gender
 {
     /// <summary>
-    /// Gender, so either male or female.
+    /// Male
     /// </summary>
-    public enum Gender
-    {
-        /// <summary>
-        /// Male
-        /// </summary>
-        Male,
-        /// <summary>
-        /// Female
-        /// </summary>
-        Female
-    }
+    Male,
+    /// <summary>
+    /// Female
+    /// </summary>
+    Female
 }
