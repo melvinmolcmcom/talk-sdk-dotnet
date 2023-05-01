@@ -20,16 +20,15 @@ public class ClientTests
 
     private class MockHttpMessageHandler : HttpMessageHandler
     {
-        public List<(HttpRequestMessage HttpRequestMessage, string Content)> RequestMessages { get; } =
-            new List<(HttpRequestMessage HttpRequestMessage, string Content)>();
+        public List<(HttpRequestMessage HttpRequestMessage, string Content)> RequestMessages { get; } = new();
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            RequestMessages.Add((request, await request.Content.ReadAsStringAsync().ConfigureAwait(false)));
+            RequestMessages.Add((request, await request.Content!.ReadAsStringAsync(cancellationToken).ConfigureAwait(false)));
             return Response;
         }
 
-        public HttpResponseMessage Response { private get; set; } = new HttpResponseMessage(HttpStatusCode.OK);
+        public HttpResponseMessage Response { private get; init; } = new (HttpStatusCode.OK);
     }
 
     [Fact]
