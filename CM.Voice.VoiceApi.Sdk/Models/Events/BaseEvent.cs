@@ -3,7 +3,7 @@ using System;
 
 namespace CM.Voice.VoiceApi.Sdk.Models.Events;
 
-public abstract class BaseEvent
+public abstract record BaseEvent
 {
     /// <summary>
     /// The type of event.
@@ -15,13 +15,13 @@ public abstract class BaseEvent
     /// The ID of the call this event belongs to.
     /// </summary>
     [JsonProperty("call-id", Order = 2)]
-    public Guid CallId { get; set; }
+    public Guid CallId { get; init; }
 
     /// <summary>
     /// The ID of the instruction the event is a result of.
     /// </summary>
     [JsonProperty("instruction-id", Order = 3, NullValueHandling = NullValueHandling.Ignore)]
-    public string InstructionId { get; set; }
+    public string InstructionId { get; init; }
 
     /// <summary>
     /// The event type of the event, used for parsing.
