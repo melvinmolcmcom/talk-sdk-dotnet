@@ -23,7 +23,7 @@ public class VoiceApiClient
     /// <param name="httpClient">The HttpClient to use for sending the instruction. You should use a singleton of this for your entire application.</param>
     /// <param name="apiKey">Your API key or product token, used for authentication.</param>
     /// <param name="url">The base URL of the CM Voice API. Optional.</param>
-    public VoiceApiClient(HttpClient httpClient, Guid apiKey, string url = "https://api.cmtelecom.com/voiceapi/v2")
+    public VoiceApiClient(HttpClient httpClient, Guid apiKey, string url = "https://api.cm.com/voiceapi/v2")
     {
         _httpClient = httpClient;
         _apiKey = apiKey;

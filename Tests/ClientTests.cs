@@ -16,7 +16,7 @@ namespace Tests;
 
 public class ClientTests
 {
-    private const string Url = "https://api.cmtelecom.com/voiceapi/v2";
+    private const string Url = "https://api.cm.com/voiceapi/v2";
 
     private class MockHttpMessageHandler : HttpMessageHandler
     {
