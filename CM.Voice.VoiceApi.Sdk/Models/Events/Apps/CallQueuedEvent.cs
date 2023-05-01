@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace CM.Voice.VoiceApi.Sdk.Models.Events.Apps;
 
@@ -14,25 +14,24 @@ public record CallQueuedEvent : BaseEvent
     /// <summary>
     /// The id (e.g. number) of the caller.
     /// </summary>
-    [JsonPropertyName("caller")]
+    [JsonProperty("caller", Order = 4)]
     public string Caller { get; init; }
 
     /// <summary>
     /// The id (e.g. number) of the callee.
     /// </summary>
-    [JsonPropertyName("callee")]
+    [JsonProperty("callee", Order = 5)]
     public string Callee { get; init; }
 
     /// <summary>
     /// True iff the PlaceCallInstruction was accepted.
     /// </summary>
-    [JsonPropertyName("success")]
+    [JsonProperty("success", Order = 6)]
     public bool Success { get; init; }
 
     /// <summary>
     /// True iff the PlaceCallInstruction was accepted.
     /// </summary>
-    [JsonPropertyName("error")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? Error { get; init; }
+    [JsonProperty("error", Order = 6, DefaultValueHandling = DefaultValueHandling.Ignore, NullValueHandling = NullValueHandling.Ignore)]
+    public string Error { get; init; }
 }

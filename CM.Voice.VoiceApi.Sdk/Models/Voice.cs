@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace CM.Voice.VoiceApi.Sdk.Models;
 
@@ -10,25 +10,25 @@ public record Voice
     /// <summary>
     /// The language (5 character locale) of the voice to use. Examples: en-US, en-GB, nl-NL. Defaults to en-GB
     /// </summary>
-    [JsonPropertyName("language")]
+    [JsonProperty("language", Order = 1)]
     public string Language { get; init; } = "en-GB";
 
     /// <summary>
     /// The gender of the voice, either female or male. Defaults to Female.
     /// </summary>
-    [JsonPropertyName("gender")]
+    [JsonProperty("gender", Order = 2)]
     public Gender Gender { get; init; } = Gender.Female;
 
     /// <summary>
     /// Usually one, but if the selected language and gender support multiple voices, you can use this to make a selection between the different ones. Defaults to 1.
     /// </summary>
-    [JsonPropertyName("number")]
+    [JsonProperty("number", Order = 3)]
     public int Number { get; init; } = 1;
 
     /// <summary>
     /// Volume of the speaking voice. Defaults to 0.
     /// </summary>
     /// <remarks>Allowed values are -4, -3, -2, -1, 0, 1, 2, 3 or 4.</remarks>
-    [JsonPropertyName("volume")]
+    [JsonProperty("volume", Order = 4)]
     public sbyte Volume { get; init; }
 }

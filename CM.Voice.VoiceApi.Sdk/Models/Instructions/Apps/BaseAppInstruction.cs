@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace CM.Voice.VoiceApi.Sdk.Models.Instructions.Apps;
 
@@ -10,58 +10,56 @@ public abstract record BaseAppInstruction
     /// <summary>
     /// The ID of the instruction.
     /// </summary>
-    [JsonPropertyName("instruction-id")]
+    [JsonProperty("instruction-id", Order = 3)]
     public string InstructionId { get; init; }
 
     /// <summary>
     /// The number to dial.
     /// </summary>
-    [JsonPropertyName("callee")]
+    [JsonProperty("callee", Order = 4)]
     public string Callee { get; init; }
 
     /// <summary>
     /// The numbers to dial.
     /// </summary>
-    [JsonPropertyName("callees")]
+    [JsonProperty("callees", Order = 4)]
     public string[] Callees { get; init; }
 
     /// <summary>
     /// The caller id to show on the end user's phone.
     /// </summary>
-    [JsonPropertyName("caller")]
+    [JsonProperty("caller", Order = 5)]
     public string Caller { get; init; }
 
     /// <summary>
     /// The caller id is hidden iff anonymous = true.
     /// </summary>
-    [JsonPropertyName("anonymous")]
+    [JsonProperty("anonymous", Order = 6)]
     public bool Anonymous { get; init; }
 
     /// <summary>
     /// Iff true, the request is not rejected if (any of) the callees are invalid.
     /// Please note that the invalid callees are not dialed, but the valid ones are.
     /// </summary>
-    [JsonPropertyName("disable-callees-validation")]
+    [JsonProperty("disable-callees-validation", Order = 7)]
     public bool DisableCalleesValidation { get; init; }
         
     /// <summary>
     /// Iff true, the tts or stt voice has a higher quality and supports more languages.
     /// Please note that premium voices are more expensive.
     /// </summary>
-    [JsonPropertyName("premium")]
+    [JsonProperty("premium", Order = 8)]
     public bool? Premium { get; init; } = false;
 
     /// <summary>
     /// Information on the voice to use if (any of) the prompt(s) is of type tts.
     /// </summary>
-    [JsonPropertyName("voice")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public Voice? Voice { get; init; } = new();
+    [JsonProperty("voice", Order = 99, NullValueHandling = NullValueHandling.Ignore)]
+    public Voice Voice { get; init; } = new();
 
     /// <summary>
     /// The url to send the POST command to for further VoiceAPI flow.
     /// </summary>
-    [JsonPropertyName("callback-url")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
-    public string? CallbackUrl { get; init; }
+    [JsonProperty("callback-url", Order = 100, NullValueHandling = NullValueHandling.Ignore)]
+    public string CallbackUrl { get; init; }
 }

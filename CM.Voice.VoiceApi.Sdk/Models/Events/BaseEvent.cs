@@ -1,5 +1,5 @@
-﻿using System;
-using System.Text.Json.Serialization;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace CM.Voice.VoiceApi.Sdk.Models.Events;
 
@@ -8,21 +8,19 @@ public abstract record BaseEvent
     /// <summary>
     /// The type of event.
     /// </summary>
-    [JsonPropertyName("type")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonProperty("type", Order = 1, NullValueHandling = NullValueHandling.Ignore)]
     public string Type => EventType;
 
     /// <summary>
     /// The ID of the call this event belongs to.
     /// </summary>
-    [JsonPropertyName("call-id")]
+    [JsonProperty("call-id", Order = 2)]
     public Guid CallId { get; init; }
 
     /// <summary>
     /// The ID of the instruction the event is a result of.
     /// </summary>
-    [JsonPropertyName("instruction-id")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+    [JsonProperty("instruction-id", Order = 3, NullValueHandling = NullValueHandling.Ignore)]
     public string InstructionId { get; init; }
 
     /// <summary>
