@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <Authors>mjepson</Authors>
     <Version>1.0.0</Version>
     <Description>SDK for use with the CM Voice API.</Description>
@@ -11,9 +11,10 @@
     <RepositoryUrl>https://github.com/CMTelecom/VoiceApiSdk</RepositoryUrl>
     <RepositoryType>Github</RepositoryType>
     <PackageTags>SDK, CM, VoiceAPI</PackageTags>
-    <Copyright>2018 CM Telecom</Copyright>
+    <Copyright>CM Telecom</Copyright>
     <PackageLicenseUrl>https://mit-license.org</PackageLicenseUrl>
     <PackageReleaseNotes>First version with support for sending instructions using a simple client.</PackageReleaseNotes>
+    <LangVersion>10</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
