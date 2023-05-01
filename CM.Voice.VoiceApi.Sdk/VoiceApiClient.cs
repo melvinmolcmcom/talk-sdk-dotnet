@@ -39,27 +39,23 @@ public class VoiceApiClient
     {
         var urlSuffix = GetUrlSuffix(instruction);
 
-        using (var request = new HttpRequestMessage(HttpMethod.Post, _url + urlSuffix))
+        using var request = new HttpRequestMessage(HttpMethod.Post, _url + urlSuffix);
+        request.Headers.Add(ApiKeyHeader, _apiKey.ToString());
+        request.Content = new StringContent(JsonConvert.SerializeObject(instruction), Encoding.UTF8, "application/json");
+
+        using var result = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        cancellationToken.ThrowIfCancellationRequested();
+
+        var reply = "";
+        if (result.Content != null)
+            reply = await result.Content.ReadAsStringAsync(cancellationToken).ConfigureAwait(false);
+
+        return new VoiceApiResult<CallQueuedEvent>
         {
-            request.Headers.Add(ApiKeyHeader, _apiKey.ToString());
-            request.Content = new StringContent(JsonConvert.SerializeObject(instruction), Encoding.UTF8, "application/json");
-
-            using (var result = await _httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false))
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-
-                var reply = "";
-                if (result.Content != null)
-                    reply = await result.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-                return new VoiceApiResult<CallQueuedEvent>
-                {
-                    HttpStatusCode = result.StatusCode,
-                    Success = result.IsSuccessStatusCode,
-                    Content = reply
-                };
-            }
-        }
+            HttpStatusCode = result.StatusCode,
+            Success = result.IsSuccessStatusCode,
+            Content = reply
+        };
     }
 
     [Obsolete("See SendAsync")]
@@ -68,16 +64,13 @@ public class VoiceApiClient
 
     private static string GetUrlSuffix(BaseAppInstruction instruction)
     {
-        switch (instruction)
+        return instruction switch
         {
-            case NotificationInstruction _:
-                return "/Notification";
-            case OtpInstruction _:
-                return "/OTP";
-            case RequestDtmfInstruction _:
-                return "/DTMF";
-            default:
-                throw new NotImplementedException($"No known endpoint for sending a {instruction.GetType().Name} to the CM VoiceApi.");
-        }
+            NotificationInstruction => "/Notification",
+            OtpInstruction => "/OTP",
+            RequestDtmfInstruction => "/DTMF",
+            _ => throw new NotImplementedException(
+                $"No known endpoint for sending a {instruction.GetType().Name} to the CM VoiceApi.")
+        };
     }
 }
