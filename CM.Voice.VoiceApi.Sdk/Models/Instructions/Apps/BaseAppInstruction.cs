@@ -43,13 +43,6 @@ public abstract record BaseAppInstruction
     /// </summary>
     [JsonProperty("disable-callees-validation", Order = 7)]
     public bool DisableCalleesValidation { get; init; }
-        
-    /// <summary>
-    /// Iff true, the tts or stt voice has a higher quality and supports more languages.
-    /// Please note that premium voices are more expensive.
-    /// </summary>
-    [JsonProperty("premium", Order = 8)]
-    public bool? Premium { get; init; } = false;
 
     /// <summary>
     /// Information on the voice to use if (any of) the prompt(s) is of type tts.

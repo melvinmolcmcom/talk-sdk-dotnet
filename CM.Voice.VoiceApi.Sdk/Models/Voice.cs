@@ -31,4 +31,11 @@ public record Voice
     /// <remarks>Allowed values are -4, -3, -2, -1, 0, 1, 2, 3 or 4.</remarks>
     [JsonProperty("volume", Order = 4)]
     public sbyte Volume { get; init; }
+    
+    /// <summary>
+    /// Iff true, the tts or stt voice has a higher quality and supports more languages.
+    /// Please note that premium voices are more expensive.
+    /// </summary>
+    [JsonProperty("premium", Order = 5)]
+    public bool? Premium { get; init; } = false;
 }
